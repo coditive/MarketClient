@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.company.market.ui.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        android:name="com.company.market.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_marketFragment"
+            app:destination="@id/marketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="com.company.market.ui.market.MarketFragment"
+        android:label="Market"
+        tools:layout="@layout/fragment_market" />
 </navigation>
