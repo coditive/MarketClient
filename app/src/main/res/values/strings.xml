@@ -4,5 +4,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="search">Search</string>
+    <string name="user_name_error">Invalid Username</string>
+    <string name="pass_error">Invalid Password</string>
+    <string name="grocery_image">Grocery Image</string>
     <string name="profile">Profile</string>
 </resources>

@@ -2,6 +2,7 @@ package com.company.market.ui.login
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,8 @@ class LoginFragment : Fragment() {
                 LoginState.IN_PROGRESS -> binding.progressBar.visibility = View.VISIBLE
                 LoginState.LOGIN_ERROR -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.editTextUsername.error = getString(R.string.user_name_error)
+                    binding.editTextPassword.error = getString(R.string.pass_error)
                     Toast.makeText(
                         requireContext(),
                         "Please enter correct login details",
@@ -63,11 +66,20 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Logged in!", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.marketFragment)
                 }
+
+                LoginState.CREATE_USER -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    Toast.makeText(requireContext(), "User Created!", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.loginFragment)
+                }
             }
         }
 
         binding.button.setOnClickListener {
-            viewModel.attemptLogin("some_user", "some_password")
+            val userName: String = binding.editTextUsername.editText?.text.toString()
+            val password: String = binding.editTextPassword.editText?.text.toString()
+            Log.d("Login Details", "Username : $userName, pass : $password")
+            viewModel.attemptLogin(userName, password)
         }
 
         return binding.root
