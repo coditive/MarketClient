@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_scrollFlags="scroll|enterAlways"
+            app:menu="@menu/market_menu"
             app:titleTextColor="@color/color_on_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 

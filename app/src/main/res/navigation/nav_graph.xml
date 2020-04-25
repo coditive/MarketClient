@@ -18,5 +18,14 @@
         android:id="@+id/marketFragment"
         android:name="com.company.market.ui.market.MarketFragment"
         android:label="Market"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_market">
+        <action
+            android:id="@+id/action_marketFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.company.market.ui.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
