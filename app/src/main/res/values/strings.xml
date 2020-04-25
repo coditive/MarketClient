@@ -8,4 +8,8 @@
     <string name="pass_error">Invalid Password</string>
     <string name="grocery_image">Grocery Image</string>
     <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="add_item_in_cart">Add items to your cart</string>
+    <string name="pay_amount">Pay ₹ %1$d</string>
 </resources>

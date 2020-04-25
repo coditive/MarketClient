@@ -14,6 +14,7 @@
             android:id="@+id/action_loginFragment_to_marketFragment"
             app:destination="@id/marketFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.company.market.ui.market.MarketFragment"
@@ -22,10 +23,18 @@
         <action
             android:id="@+id/action_marketFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_marketFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.company.market.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        tools:layout="@layout/fragment_cart"
+        android:id="@+id/cartFragment"
+        android:name="com.company.market.ui.cart.CartFragment"
+        android:label="@string/your_cart" />
 </navigation>

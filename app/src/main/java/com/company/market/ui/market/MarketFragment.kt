@@ -50,10 +50,17 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
-        return if (item?.itemId == R.id.menu_item_profile) {
-            findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToProfileFragment())
-            true
-        } else false
+        return when (item?.itemId) {
+            R.id.menu_item_profile -> {
+                findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToProfileFragment())
+                true
+            }
+            R.id.menu_cart_item -> {
+                findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToCartFragment())
+                true
+            }
+            else -> false
+        }
 
     }
 }
