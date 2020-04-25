@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.market.data.Product
 import com.company.market.databinding.FragmentMarketBinding
+import kotlinx.android.synthetic.main.fragment_market.*
 
 class MarketFragment : Fragment() {
     override fun onCreateView(
@@ -25,7 +26,7 @@ class MarketFragment : Fragment() {
                 val list: MutableList<Product> = mutableListOf()
                 repeat(50) {
                     list.add(
-                        Product("some product", it, it)
+                        Product("some product", it, it, 100)
                     )
                 }
                 adapter = ProductAdapter(list)

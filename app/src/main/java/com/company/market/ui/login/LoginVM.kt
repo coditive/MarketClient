@@ -1,11 +1,10 @@
 package com.company.market.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginVM : ViewModel() {
 
@@ -21,13 +20,39 @@ class LoginVM : ViewModel() {
         LoginState.NOT_LOGGED_IN
     )
     val status: LiveData<LoginState> = _status
-    fun attemptLogin(userName: String, password: String) {
-        viewModelScope.launch {
-            _status.postValue(LoginState.IN_PROGRESS)
-            delay(2000)
-            // insert login query here
-            _status.postValue(LoginState.LOGGED_IN)
+
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    fun attemptLogin(userName: String, password: String?) {
+        _status.value = LoginState.IN_PROGRESS
+
+        isPasswordValid(password)
+
+        if (password != null) {
+            auth.signInWithEmailAndPassword(userName, password)
+                .addOnSuccessListener {
+                    _status.value = LoginState.LOGGED_IN
+                    _token.value = auth.currentUser?.displayName
+                }.addOnFailureListener{
+                    _status.value = LoginState.LOGIN_ERROR
+                }
         }
+    }
+
+    fun createUser(userName: String, password: String){
+        _status.value = LoginState.CREATE_USER
+
+        auth.createUserWithEmailAndPassword(userName, password)
+            .addOnSuccessListener {
+                _status.value = LoginState.LOGGED_IN
+            }
+            .addOnFailureListener {
+                _status.value = LoginState.LOGIN_ERROR
+            }
+    }
+
+    private fun isPasswordValid(text: String?): Boolean {
+        return text != null && text.length >= 8
     }
 }
 
@@ -35,5 +60,6 @@ enum class LoginState {
     NOT_LOGGED_IN,
     IN_PROGRESS,
     LOGGED_IN,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    CREATE_USER
 }
