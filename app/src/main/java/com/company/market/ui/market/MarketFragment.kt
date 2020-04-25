@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.market.R
 import com.company.market.data.Product
 import com.company.market.databinding.FragmentMarketBinding
-import kotlinx.android.synthetic.main.fragment_market.*
 
 class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,7 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 val list: MutableList<Product> = mutableListOf()
                 repeat(50) {
                     list.add(
-                        Product(it,"some product",  it, 100)
+                        Product(it.toString(), "some product", it, 100)
                     )
                 }
                 adapter = ProductAdapter(list)
