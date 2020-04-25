@@ -1,10 +1,7 @@
 package com.company.market.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.company.market.data.Product
 
 
@@ -15,12 +12,14 @@ interface ProductDao {
     fun observeProduct(): LiveData<List<Product>>
 
     @Query("SELECT * FROM product WHERE product_id = :productId")
-    suspend fun getProduct(productId: Int): Product?
+    suspend fun getProduct(productId: String): Product?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(product: Product)
 
-    @Query("DELETE FROM product WHERE product_id = :productId")
-    suspend fun deleteProduct(productId: Int)
+    @Delete
+    suspend fun deleteAllProduct()
 
+    @Update
+    suspend fun updateProduct(vararg product: Product)
 }

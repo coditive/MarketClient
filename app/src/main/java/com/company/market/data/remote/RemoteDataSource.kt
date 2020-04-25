@@ -8,15 +8,19 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class RemoteDataSource internal constructor(
     private val auth: FirebaseAuth,
-    private val db: FirebaseFirestore
+    private val db: FirebaseFirestore,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
     fun createUser(){}
 
-    fun getUserProfile(): Result<UserProfile?> {
+    suspend fun getUserProfile(): Result<UserProfile?> = withContext(ioDispatcher){
         val uid = auth.uid
         var userProfile: UserProfile?
         lateinit var result: Result<UserProfile?>
@@ -31,10 +35,10 @@ class RemoteDataSource internal constructor(
                     result = Error(it)
                 }
         }
-        return result
+        return@withContext result
     }
 
-    fun updateUserProfile(userProfile: HashMap<Any, Any>): Result<Boolean>{
+    suspend fun updateUserProfile(userProfile: HashMap<Any, Any>): Result<Boolean> = withContext(ioDispatcher){
         val uid = auth.uid
         lateinit var result: Result<Boolean>
         if(uid != null){
@@ -47,7 +51,7 @@ class RemoteDataSource internal constructor(
                     result = Error(it)
                 }
         }
-        return result
+        return@withContext result
     }
 
     fun getProductsFromFirestore(): Result<List<Product>>{
@@ -67,4 +71,5 @@ class RemoteDataSource internal constructor(
 
         return result
     }
+
 }

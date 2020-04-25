@@ -44,15 +44,10 @@ class LocalDataSource internal constructor (
         }
     }
 
-    suspend fun deleteProduct (product: Product) = withContext(ioDispatcher) {
+    suspend fun deleteAllProduct () = withContext(ioDispatcher) {
         try{
-            val result = productDao.getProduct(product.id)
-            if(result == null){
-                productDao.deleteProduct(product.id)
-                return@withContext Success(true)
-            } else {
-                return@withContext Error(Exception("Product Does not Exists"))
-            }
+            productDao.deleteAllProduct()
+            return@withContext Success(true)
         } catch (e: Exception){
             return@withContext Error(e)
         }

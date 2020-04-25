@@ -9,6 +9,6 @@ import androidx.room.PrimaryKey
 data class UserProfile constructor(
     @PrimaryKey @ColumnInfo val userId: String,
     @ColumnInfo val userName: String,
-    @ColumnInfo val address: List<String>,
+    @ColumnInfo val address: String,
     @ColumnInfo val phoneNumber: String
 )

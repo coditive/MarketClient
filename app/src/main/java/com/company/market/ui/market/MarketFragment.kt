@@ -26,7 +26,7 @@ class MarketFragment : Fragment() {
                 val list: MutableList<Product> = mutableListOf()
                 repeat(50) {
                     list.add(
-                        Product("some product", it, it, 100)
+                        Product(it,"some product",  it, 100)
                     )
                 }
                 adapter = ProductAdapter(list)
