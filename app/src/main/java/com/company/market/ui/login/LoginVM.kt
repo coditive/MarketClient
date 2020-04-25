@@ -32,7 +32,7 @@ class LoginVM : ViewModel() {
             auth.signInWithEmailAndPassword(userName, password)
                 .addOnSuccessListener {
                     _status.value = LoginState.LOGGED_IN
-                    _token.value = auth.currentUser?.displayName
+                    _token.value = auth.currentUser?.uid
                 }.addOnFailureListener{
                     _status.value = LoginState.LOGIN_ERROR
                 }

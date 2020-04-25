@@ -1,8 +1,14 @@
 package com.company.market.data
 
-data class UserProfile (
-    val userName: String,
-    val userId: String,
-    val address: String,
-    val phoneNumber: String
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(tableName = "user_profile")
+data class UserProfile constructor(
+    @PrimaryKey @ColumnInfo val userId: String,
+    @ColumnInfo val userName: String,
+    @ColumnInfo val address: List<String>,
+    @ColumnInfo val phoneNumber: String
 )

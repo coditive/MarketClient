@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "595504023290",
+    "firebase_url": "https://nyss-groceries.firebaseio.com",
+    "project_id": "nyss-groceries",
+    "storage_bucket": "nyss-groceries.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595504023290:android:5501749d5c812ea809eb43",
+        "android_client_info": {
+          "package_name": "com.company.market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595504023290-sheu85d2557rtjhfat1mgnhosiam43fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.market",
+            "certificate_hash": "b7ca6115cad87cb5660c4a6a69b84fda0ef8b1a5"
+          }
+        },
+        {
+          "client_id": "595504023290-mmn0c52t5b5vpi1tdsssssftjksfoj8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKqij-UBW6CHKf45MoniCwBjRHVQcex9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595504023290-mmn0c52t5b5vpi1tdsssssftjksfoj8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
