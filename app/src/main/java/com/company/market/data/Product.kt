@@ -1,14 +1,17 @@
 package com.company.market.data
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.squareup.moshi.JsonClass
 
 
+@JsonClass(generateAdapter = true)
 @Entity(tableName = "product")
 data class Product(
-    @PrimaryKey @ColumnInfo(name = "product_id") val id: String,
-    @ColumnInfo(name = "product_name") val title: String,
-    @ColumnInfo(name = "product_price") val price: Int,
-    @ColumnInfo(name = "product_stock") val inStock: Int
+    @PrimaryKey val id: String,
+    val title: String,
+    val price: Int,
+    val quantity: Int,
+    val unit: String,
+    val inStock: Boolean
 )
