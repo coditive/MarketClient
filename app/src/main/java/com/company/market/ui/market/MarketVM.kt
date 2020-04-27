@@ -8,12 +8,10 @@ import com.company.market.data.repos.ProductRepo
 import kotlinx.coroutines.launch
 
 class MarketVM(private val productRepo: ProductRepo) : ViewModel() {
-    val productList: LiveData<List<Product>> = productRepo.productInMemory
-    val loadingState: LiveData<Boolean> = productRepo.loadingState
 
-    init {
-        reload()
-    }
+    val productList: LiveData<List<Product>> = productRepo.productInMemory
+
+    val loadingState: LiveData<Boolean> = productRepo.loadingState
 
     fun reload() {
         viewModelScope.launch {

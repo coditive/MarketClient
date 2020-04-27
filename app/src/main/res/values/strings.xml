@@ -12,4 +12,5 @@
     <string name="your_cart">Your Cart</string>
     <string name="add_item_in_cart">Add items to your cart</string>
     <string name="pay_amount">Pay ₹ %1$d</string>
+    <string name="profile_pic">profile_pic</string>
 </resources>

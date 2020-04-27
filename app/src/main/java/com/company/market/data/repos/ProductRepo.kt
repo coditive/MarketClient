@@ -14,26 +14,22 @@ class ProductRepo(
     private val _loadingState: MutableLiveData<Boolean> = MutableLiveData(false)
     val loadingState: LiveData<Boolean> = _loadingState
 
-    private val _productsInMemory: MutableLiveData<List<Product>> = MutableLiveData(listOf())
-    val productInMemory: LiveData<List<Product>> = _productsInMemory
+    //loading from cached db
+    val productInMemory: LiveData<List<Product>> = localDataSource.observeProduct()
 
     suspend fun loadProducts() {
         try {
             _loadingState.value = true
-            //loading from cached db
-            _productsInMemory.value = localDataSource.getAllProducts()
-
             //fetch from internet
             val fetchedProducts = remoteDataSource.getProducts()
 
             //update db cache
             fetchedProducts.forEach { localDataSource.insertProduct(it) }
-
-            _productsInMemory.value = fetchedProducts
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
             _loadingState.value = false
         }
     }
+
 }

@@ -18,7 +18,7 @@ class ProductAdapter :
         RecyclerView.ViewHolder(item) {
         fun bind(product: Product) {
             item.findViewById<TextView>(R.id.textView_Price).text =
-                String.format("₹%.2f %s", product.price.toFloat() / product.quantity, product.unit)
+                String.format("₹%.2f %s", product.price.toFloat() / product.quantity, product.unit.toUpperCase())
             item.findViewById<TextView>(R.id.textView_title).text = product.title
         }
     }
