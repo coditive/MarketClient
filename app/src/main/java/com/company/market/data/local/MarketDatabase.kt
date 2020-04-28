@@ -8,7 +8,6 @@ import com.company.market.data.UserProfile
 
 
 @Database(entities = [UserProfile::class, Product::class], version = 1, exportSchema = false)
-@TypeConverters(value = [Converters::class])
 abstract class MarketDatabase: RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun userProfileDao(): UserProfileDao
