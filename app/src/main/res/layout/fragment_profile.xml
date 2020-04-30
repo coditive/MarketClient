@@ -5,15 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_refresh_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView_user"
-        android:layout_width="110dp"
-        android:layout_height="96dp"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/profile_pic"
         android:src="@drawable/ic_account_circle_black_24dp"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/profile_pic" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -24,16 +45,19 @@
 
     <TextView
         android:id="@+id/textView_name"
+        style="@style/profile_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="32sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline"
         tools:text="Rahul Sharma" />
 
     <TextView
+
         android:id="@+id/textView_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,11 +65,29 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_name"
         tools:text="House 32, Nehru Road, Ram Nagar, Nagpur" />
+
+    <TextView
+        android:id="@+id/textView_email"
+        style="@style/profile_item"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_address" />
+
+    <TextView
+        android:id="@+id/textView_phone"
+        style="@style/profile_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_email" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/edit_fab"

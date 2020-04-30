@@ -15,16 +15,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
+import com.company.market.MarketApplication
 import com.company.market.R
-import com.company.market.data.local.MarketDatabase
-import com.company.market.data.local.ProductDao
-import com.company.market.data.remote.RemoteApi
 import com.company.market.databinding.FragmentMarketBinding
-import com.company.market.utils.BASE_URL
-import com.company.market.utils.MARKET_DB_NAME
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +28,10 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     private val viewModel by lazy {
         ViewModelProvider(
             this@MarketFragment,
-            MarketVMFactory(getRemoteApi(), getDb())
+            MarketVMFactory(
+                (requireActivity().application as MarketApplication).appContainer.remoteApi,
+                (requireActivity().application as MarketApplication).appContainer.productDao
+            )
         ).get(MarketVM::class.java)
     }
 
@@ -86,19 +82,5 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             else -> false
         }
 
-    }
-
-    //TODO : move below dependency providers out of activity / fragment
-    private fun getRemoteApi(): RemoteApi =
-        Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(MoshiConverterFactory.create())
-            .build().create(RemoteApi::class.java)
-
-    private fun getDb(): ProductDao {
-        val db = Room.databaseBuilder(
-            requireContext().applicationContext,
-            MarketDatabase::class.java,
-            MARKET_DB_NAME
-        ).build()
-        return db.productDao()
     }
 }

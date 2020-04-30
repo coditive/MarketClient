@@ -7,27 +7,28 @@ import com.company.market.data.remote.RemoteApi
 
 class UserProfileRepo (
     private val localDataSource: UserProfileDao,
-    private val remoteDataSource: RemoteApi
+    private val remoteDataSource: RemoteApi,
+    private val userToken: String?
 ){
     private val _loadingState: MutableLiveData<Boolean> = MutableLiveData(false)
     val loadingState: LiveData<Boolean> = _loadingState
 
     val cachedUserProfile = localDataSource.observeUserProfile()
 
-    suspend fun loadUserProfile(userId: String){
+    suspend fun loadUserProfile() {
         try{
-            _loadingState.value = true
+            _loadingState.postValue(true)
 
             //load user profile from network
-            val userProfile = remoteDataSource.getUserProfile(userId)
+            val userProfile = remoteDataSource.getUserProfile(userToken!!)
 
             //cache it in database for persistence.
             localDataSource.insertUserProfile(userProfile)
 
         } catch (e: Exception){
-
+            e.printStackTrace()
         } finally {
-            _loadingState.value = false
+            _loadingState.postValue(false)
         }
     }
 }

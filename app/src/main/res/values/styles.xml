@@ -86,4 +86,9 @@
         <item name="android:background">@color/color_primary_variant</item>
     </style>
 
+    <style name="profile_item" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
 </resources>
