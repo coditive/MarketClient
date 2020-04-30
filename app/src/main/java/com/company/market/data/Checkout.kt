@@ -17,8 +17,3 @@ data class Checkout (
     val payment_status: String
 )
 
-data class Order(
-    val product_id: Int,
-    val total_item_cost: Int,
-    val quantity: Int
-)
