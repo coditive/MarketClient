@@ -1,5 +1,6 @@
 package com.company.market.data.repos
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.company.market.data.Product
@@ -32,4 +33,21 @@ class ProductRepo(
         }
     }
 
+    suspend fun addToCart(position: Int) {
+        val selectedProduct = productInMemory.value?.get(position)
+        if (selectedProduct != null) {
+            localDataSource.setIsInCart(true, selectedProduct.id)
+        } else Log.e(TAG, "item at position $position not found in memory ")
+    }
+
+    suspend fun removeFromCart(position: Int) {
+        val selectedProduct = productInMemory.value?.get(position)
+        if (selectedProduct != null) {
+            localDataSource.setIsInCart(false, selectedProduct.id)
+        } else Log.e(TAG, "item at position $position not found in memory ")
+    }
+
+    companion object {
+        private const val TAG = "ProductRepo"
+    }
 }

@@ -1,30 +1,48 @@
 package com.company.market.ui.market
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.company.market.R
 import com.company.market.data.Product
+import com.company.market.databinding.ItemCompactProductBinding
 
 
-class ProductAdapter :
+class ProductAdapter(private val clickHandler: MarketFragment.ClickHandler) :
     androidx.recyclerview.widget.ListAdapter<Product, ProductAdapter.CompactViewHolder>(
         CALLBACK
     ) {
-    inner class CompactViewHolder(private val item: View) :
-        RecyclerView.ViewHolder(item) {
+    inner class CompactViewHolder(private val binding: ItemCompactProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
-            item.findViewById<TextView>(R.id.textView_Price).text =
-                String.format("₹%.2f %s", product.price.toFloat() / product.quantity, product.unit.toUpperCase())
-            item.findViewById<TextView>(R.id.textView_title).text = product.title
+            binding.apply {
+                addRemoveButton.apply {
+                    if (product.isInCart) {
+                        setOnClickListener { clickHandler.removeFromCart(adapterPosition) }
+                        setBackgroundColor(ContextCompat.getColor(context, R.color.color_error))
+                        text = context.getText(R.string.remove_from_cart)
+                    } else {
+                        setOnClickListener { clickHandler.addToCart(adapterPosition) }
+                        setBackgroundColor(ContextCompat.getColor(context, R.color.color_secondary))
+                        text = context.getText(R.string.add_to_cart)
+                    }
+                }
+
+                textViewPrice.text = String.format(
+                    "₹%.2f/%s",
+                    product.price.toFloat() / product.quantity,
+                    product.unit.toUpperCase()
+                )
+                textViewTitle.text = product.title
+
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CompactViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_compact_product, parent, false)
+        ItemCompactProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun submitList(list: List<Product>?) {
@@ -44,9 +62,9 @@ class ProductAdapter :
         override fun areItemsTheSame(oldItem: Product, newItem: Product) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.price == newItem.price ||
+        override fun areContentsTheSame(oldItem: Product, newItem: Product) =
+            oldItem.isInCart == newItem.isInCart &&
+                    oldItem.price == newItem.price &&
                     oldItem.inStock == newItem.inStock
-        }
     }
 }

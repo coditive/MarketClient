@@ -41,7 +41,7 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMarketBinding.inflate(inflater, container, false)
-        val productAdapter = ProductAdapter()
+        val productAdapter = ProductAdapter(ClickHandler())
         viewModel.apply {
             loadingState.observe(viewLifecycleOwner) { loading ->
                 binding.swipeToRefreshView.isRefreshing = loading
@@ -82,5 +82,15 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             else -> false
         }
 
+    }
+
+    inner class ClickHandler {
+        fun addToCart(index: Int) {
+            viewModel.addToCart(index)
+        }
+
+        fun removeFromCart(index: Int) {
+            viewModel.removeFromCart(index)
+        }
     }
 }

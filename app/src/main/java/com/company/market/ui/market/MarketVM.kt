@@ -18,4 +18,12 @@ class MarketVM(private val productRepo: ProductRepo) : ViewModel() {
             productRepo.loadProducts()
         }
     }
+
+    fun addToCart(position: Int) {
+        viewModelScope.launch { productRepo.addToCart(position) }
+    }
+
+    fun removeFromCart(position: Int) {
+        viewModelScope.launch { productRepo.removeFromCart(position) }
+    }
 }

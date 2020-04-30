@@ -23,6 +23,9 @@ interface ProductDao {
     @Query("DELETE FROM product")
     suspend fun deleteAllProduct()
 
+    @Query("UPDATE product SET isInCart =:inCart WHERE id = :productId")
+    suspend fun setIsInCart(inCart: Boolean, productId: String)
+
     @Update
     suspend fun updateProduct(vararg product: Product)
 }

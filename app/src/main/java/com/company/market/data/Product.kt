@@ -13,5 +13,8 @@ data class Product(
     val price: Int,
     val quantity: Int,
     val unit: String,
-    val inStock: Boolean
+    val inStock: Boolean,
+
+    //not in backend
+    val isInCart: Boolean = false
 )
