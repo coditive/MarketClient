@@ -5,34 +5,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.company.market.MarketApplication
 import com.company.market.databinding.FragmentCartBinding
+import com.company.market.ui.market.MarketVM
+import com.company.market.ui.market.MarketVMFactory
 
 class CartFragment : Fragment() {
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this@CartFragment,
+            CartVMFactory(
+                (requireActivity().application as MarketApplication).appContainer.productDao,
+                (requireActivity().application as MarketApplication).appContainer.orderDao
+            )
+        ).get(CartVM::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCartBinding.inflate(inflater, container, false)
-        val cartAdapter = CartAdapter(ClickHandler())
-//        viewModel.cartItemList.observe(viewLifecycleOwner) {
-//            cartAdapter.submitList(it.toMutableList())
-//            val sum = it.sumBy { pair -> pair.first.price * pair.second }
-//            binding.orderButton.apply {
-//                if (sum != 0) {
-//                    text = resources.getString(R.string.pay_amount, sum)
-//                    isEnabled = true
-//
-//                } else {
-//                    isEnabled = false
-//                    text = resources.getString(R.string.add_item_in_cart)
-//                }
-//
-//            }
-//        }
+
+        val cartAdapter = CartAdapter(ClickHandler(), viewModel.productsInCart.value, viewModel.orders.value)
 
         binding.apply {
             toolbar.setupWithNavController(findNavController())

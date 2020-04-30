@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "order")
 data class Order(
-    @PrimaryKey val product_id: Int,
+    @PrimaryKey val product_id: String,
     val total_item_cost: Int,
     val quantity: Int
 )

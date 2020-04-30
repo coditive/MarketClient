@@ -30,7 +30,8 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             this@MarketFragment,
             MarketVMFactory(
                 (requireActivity().application as MarketApplication).appContainer.remoteApi,
-                (requireActivity().application as MarketApplication).appContainer.productDao
+                (requireActivity().application as MarketApplication).appContainer.productDao,
+                (requireActivity().application as MarketApplication).appContainer.orderDao
             )
         ).get(MarketVM::class.java)
     }

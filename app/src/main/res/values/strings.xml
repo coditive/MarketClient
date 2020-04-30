@@ -15,4 +15,5 @@
     <string name="profile_pic">profile_pic</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="remove_from_cart">Remove from cart</string>
+    <string name="total_amount">Total Amount</string>
 </resources>
