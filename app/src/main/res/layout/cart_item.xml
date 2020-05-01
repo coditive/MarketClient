@@ -24,6 +24,8 @@
         android:layout_marginStart="8dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/remove_button"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/textView_name"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="2kg" />
@@ -48,6 +50,8 @@
         android:src="@drawable/ic_remove_circle_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textView_price"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
