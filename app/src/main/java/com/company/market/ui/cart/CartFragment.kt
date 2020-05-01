@@ -1,6 +1,7 @@
 package com.company.market.ui.cart
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,12 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.market.MarketApplication
 import com.company.market.databinding.FragmentCartBinding
-import com.company.market.ui.market.MarketVM
-import com.company.market.ui.market.MarketVMFactory
+import androidx.lifecycle.observe
+import com.company.market.data.Order
+import com.company.market.data.Product
+import com.company.market.ui.market.MarketFragment
+import kotlinx.android.synthetic.main.fragment_cart.*
+
 
 class CartFragment : Fragment() {
 
@@ -20,7 +25,6 @@ class CartFragment : Fragment() {
         ViewModelProvider(
             this@CartFragment,
             CartVMFactory(
-                (requireActivity().application as MarketApplication).appContainer.productDao,
                 (requireActivity().application as MarketApplication).appContainer.orderDao
             )
         ).get(CartVM::class.java)
@@ -32,15 +36,15 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCartBinding.inflate(inflater, container, false)
-
-        val cartAdapter = CartAdapter(ClickHandler(), viewModel.productsInCart.value, viewModel.orders.value)
-
         binding.apply {
             toolbar.setupWithNavController(findNavController())
-            recyclerView.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = cartAdapter
-            }
+
+                recyclerView.apply {
+                    layoutManager = LinearLayoutManager(requireContext())
+                    viewModel.ordersInCart.observe(viewLifecycleOwner){
+                        adapter = CartAdapter(ClickHandler(), it)
+                    }
+                }
             orderButton.apply {
                 setOnClickListener {
 //                    if (viewModel.cartItemList.value?.sumBy { pair -> pair.first.price * pair.second } ?: 0 != 0) {

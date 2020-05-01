@@ -6,17 +6,11 @@ import com.company.market.data.Order
 import com.company.market.data.Product
 import com.company.market.data.local.OrderDao
 import com.company.market.data.local.ProductDao
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class CartVM(private val productDao: ProductDao, private val orderDao: OrderDao) : ViewModel() {
+class CartVM(private val orderDao: OrderDao) : ViewModel() {
 
-     lateinit var productsInCart: LiveData<List<Product>>
-     lateinit var orders: LiveData<List<Order>>
-
-     init {
-
-          Log.d("CartVM", "product in Cart : ${productDao.getItemsInCart().value?.size}")
-          Log.d("CartVM", "product in Cart : ${orderDao.observeOrders().value?.size}")
-     }
-
+      val ordersInCart: LiveData<List<Order>> = orderDao.observeOrders()
 }

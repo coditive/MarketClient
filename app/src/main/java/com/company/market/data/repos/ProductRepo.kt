@@ -40,7 +40,8 @@ class ProductRepo(
         val selectedProduct = productInMemory.value?.get(position)
         if (selectedProduct != null) {
             productDataSource.setIsInCart(true, selectedProduct.id)
-            val order = Order(selectedProduct.id, selectedProduct.price , 1)
+            val order = Order(selectedProduct.id, selectedProduct.title, selectedProduct.price,
+                selectedProduct.price , 1)
             Log.d("ProductRepo", "Order price : ${order.total_item_cost}")
             orderDataSource.insertOrder(order)
         } else Log.e(TAG, "item at position $position not found in memory ")

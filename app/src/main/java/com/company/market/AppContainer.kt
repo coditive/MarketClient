@@ -15,7 +15,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class AppContainer(application: MarketApplication) {
     val remoteApi: RemoteApi =
-
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
