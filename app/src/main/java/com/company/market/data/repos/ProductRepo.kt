@@ -41,7 +41,7 @@ class ProductRepo(
         if (selectedProduct != null) {
             productDataSource.setIsInCart(true, selectedProduct.id)
             val order = Order(selectedProduct.id, selectedProduct.title, selectedProduct.price,
-                selectedProduct.price , 1)
+                selectedProduct.price.toDouble() , 1.0)
             Log.d("ProductRepo", "Order price : ${order.total_item_cost}")
             orderDataSource.insertOrder(order)
         } else Log.e(TAG, "item at position $position not found in memory ")
@@ -55,10 +55,10 @@ class ProductRepo(
         } else Log.e(TAG, "item at position $position not found in memory ")
     }
 
-    suspend fun addOrder(position: Int){
-
+    suspend fun removeFromCartUsingId(id: String){
+        productDataSource.setIsInCart(false, id)
+        orderDataSource.deleteOrder(id)
     }
-
 
     companion object {
         private const val TAG = "ProductRepo"

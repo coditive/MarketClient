@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Checkout (
     val order: List<Order>,
-    val total_cost: Int,
+    val total_cost: String,
     val delivery_status: String,
     val mode_of_payment: String,
     val payment_status: String

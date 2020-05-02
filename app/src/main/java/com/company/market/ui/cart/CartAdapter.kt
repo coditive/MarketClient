@@ -17,7 +17,7 @@ class CartAdapter(
         fun bind(order: Order) {
             binding.apply {
                 textViewName.text = order.product_name
-                textViewQuantity.text = String.format("%d kg", order.quantity)
+                textViewQuantity.text = String.format("%.2f kg", order.quantity)
                 textViewPrice.text = String.format("₹ %d", order.price)
                 addButton.setOnClickListener { clickListener.add(adapterPosition) }
                 removeButton.setOnClickListener { clickListener.remove(adapterPosition) }

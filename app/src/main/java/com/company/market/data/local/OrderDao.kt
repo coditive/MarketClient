@@ -14,7 +14,7 @@ interface OrderDao {
     fun observeOrders(): LiveData<List<Order>>
 
     @Query("UPDATE `order` SET quantity = :newQuantity WHERE product_id = :id")
-    suspend fun setQuantity(newQuantity: Int, id: String)
+    suspend fun setQuantity(newQuantity: Double, id: String)
 
     @Query("SELECT * FROM `order` WHERE product_id = :id")
     suspend fun getOrder(id: String): Order

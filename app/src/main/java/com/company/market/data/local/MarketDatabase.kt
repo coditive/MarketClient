@@ -10,7 +10,7 @@ import com.company.market.data.UserProfile
 @Database(
     entities = [UserProfile::class, Product::class, Order::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class MarketDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
