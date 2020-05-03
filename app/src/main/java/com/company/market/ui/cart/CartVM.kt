@@ -13,6 +13,8 @@ import com.company.market.data.repos.ProductRepo
 import com.company.market.utils.toJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.okhttp.MediaType
+import com.squareup.okhttp.RequestBody
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -46,15 +48,13 @@ class CartVM(private val orderDao: OrderDao,
             orders, totalSum.toString(), "in_process",
             "in_cash", "not_paid"
         )
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
         viewModelScope.launch(Dispatchers.IO) {
             orders.forEach {
                 productRepo.removeFromCartUsingId(it.product_id)
             }
-            val jsonBody = checkOut.toJson(moshi)
-            Log.d("CartVM", "json body : $jsonBody")
-            remoteApi.orderProducts(userId,jsonBody)
+
+            remoteApi.orderProducts(userId, checkOut)
         }
     }
 }
