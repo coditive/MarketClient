@@ -14,5 +14,5 @@ interface RemoteApi {
     suspend fun orderProducts(@Path("user_id")userId: String, @Body jsonBody: Checkout)
 
     @GET("api/user_orders/{user_id}")
-    suspend fun getUserOrders(@Path("user_id")userId: String): List<UserOrders>
+    suspend fun getUserOrders(@Path("user_id")userId: String):List<UserOrders>
 }
