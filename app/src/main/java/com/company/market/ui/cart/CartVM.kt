@@ -1,6 +1,5 @@
 package com.company.market.ui.cart
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
