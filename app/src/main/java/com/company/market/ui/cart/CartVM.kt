@@ -1,6 +1,5 @@
 package com.company.market.ui.cart
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -10,11 +9,6 @@ import com.company.market.data.Order
 import com.company.market.data.local.OrderDao
 import com.company.market.data.remote.RemoteApi
 import com.company.market.data.repos.ProductRepo
-import com.company.market.utils.toJson
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.squareup.okhttp.MediaType
-import com.squareup.okhttp.RequestBody
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

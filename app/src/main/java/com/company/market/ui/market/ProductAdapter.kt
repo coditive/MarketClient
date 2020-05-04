@@ -19,15 +19,50 @@ class ProductAdapter(private val clickHandler: MarketFragment.ClickHandler) :
         fun bind(product: Product) {
             binding.apply {
                 addRemoveButton.apply {
-                    if (product.isInCart) {
-                        setOnClickListener { clickHandler.removeFromCart(adapterPosition) }
-                        setBackgroundColor(ContextCompat.getColor(context, R.color.color_error))
-                        text = context.getText(R.string.remove_from_cart)
+                    if (product.inStock) {
+                        if (product.isInCart) {
+                            setOnClickListener { clickHandler.removeFromCart(adapterPosition) }
+                            setTextColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.color_on_secondary
+                                )
+                            )
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.color_secondary
+                                )
+                            )
+                            text = context.getText(R.string.remove_from_cart)
+                        } else {
+                            setOnClickListener { clickHandler.addToCart(adapterPosition) }
+                            setTextColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.color_on_secondary
+                                )
+                            )
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.color_secondary
+                                )
+                            )
+                            text = context.getText(R.string.add_to_cart)
+                        }
                     } else {
-                        setOnClickListener { clickHandler.addToCart(adapterPosition) }
-                        setBackgroundColor(ContextCompat.getColor(context, R.color.color_secondary))
-                        text = context.getText(R.string.add_to_cart)
+                        isEnabled = false
+                        setTextColor(ContextCompat.getColor(context, R.color.color_on_error))
+                        setBackgroundColor(
+                            ContextCompat.getColor(
+                                context,
+                                R.color.color_error
+                            )
+                        )
+                        text = context.getText(R.string.out_of_stock)
                     }
+
                 }
 
                 textViewPrice.text = String.format(
