@@ -1,6 +1,5 @@
 package com.company.market.ui.cart
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.market.MarketApplication
 import com.company.market.R
 import com.company.market.databinding.FragmentCartBinding
-import com.company.market.ui.market.MarketFragment
 
 
 class CartFragment : Fragment() {
@@ -48,7 +46,8 @@ class CartFragment : Fragment() {
                         binding.apply {
                             totalAmount.text = String.format("₹ %.2f", sum)
                             orderButton.text = resources.getString(R.string.place_order)
-                            orderButton.setOnClickListener { user.value?.let { it1 ->
+                            orderButton.setOnClickListener {
+                                user?.let { it1 ->
                                 viewModel.orderProducts(it1, sum, orders)
                                 }
                             }

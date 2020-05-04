@@ -31,10 +31,19 @@
         android:id="@+id/profileFragment"
         android:name="com.company.market.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_cart"
         android:id="@+id/cartFragment"
         android:name="com.company.market.ui.cart.CartFragment"
         android:label="@string/your_cart" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.company.market.ui.orders.OrdersFragment"
+        android:label="OrdersFragment"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

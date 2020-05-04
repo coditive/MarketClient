@@ -1,7 +1,13 @@
 package com.company.market.data.remote
 
-import com.company.market.data.*
-import retrofit2.http.*
+import com.company.market.data.Checkout
+import com.company.market.data.Product
+import com.company.market.data.UserOrder
+import com.company.market.data.UserProfile
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface RemoteApi {
     @GET("api/read-products")
@@ -14,5 +20,5 @@ interface RemoteApi {
     suspend fun orderProducts(@Path("user_id")userId: String, @Body jsonBody: Checkout)
 
     @GET("api/user_orders/{user_id}")
-    suspend fun getUserOrders(@Path("user_id")userId: String):List<UserOrders>
+    suspend fun getUserOrders(@Path("user_id") userId: String): List<UserOrder>
 }

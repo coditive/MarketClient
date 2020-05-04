@@ -38,7 +38,7 @@ class AppContainer(application: MarketApplication) {
     val productDao = db.productDao()
     val userProfileDao = db.userProfileDao()
     val orderDao = db.orderDao()
-    val currentUserToken = lazy {
+    val currentUserToken by lazy {
         application.getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE)
             .getString(TOKEN_KEY, null)
     }

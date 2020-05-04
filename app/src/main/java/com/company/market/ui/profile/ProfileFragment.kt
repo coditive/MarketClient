@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.company.market.MarketApplication
 import com.company.market.data.UserProfile
 import com.company.market.databinding.FragmentProfileBinding
@@ -19,7 +20,7 @@ class ProfileFragment : Fragment() {
             this@ProfileFragment, ProfileVMFactory(
                 (requireActivity().application as MarketApplication).appContainer.remoteApi,
                 (requireActivity().application as MarketApplication).appContainer.userProfileDao,
-                (requireActivity().application as MarketApplication).appContainer.currentUserToken.value
+                (requireActivity().application as MarketApplication).appContainer.currentUserToken
             )
         ).get(ProfileVM::class.java)
     }
@@ -51,6 +52,11 @@ class ProfileFragment : Fragment() {
         }
         binding.apply {
             refreshButton.setOnClickListener { viewModel.refreshProfile() }
+            buttonMyOrders.setOnClickListener {
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToOrdersFragment()
+                )
+            }
             editFab.setOnClickListener {
                 Toast.makeText(
                     requireContext(),

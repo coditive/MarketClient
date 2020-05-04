@@ -18,4 +18,5 @@
     <string name="total_amount">Total Amount</string>
     <string name="place_order">Place Order</string>
     <string name="out_of_stock">Out of Stock</string>
+    <string name="my_orders">My Orders</string>
 </resources>
