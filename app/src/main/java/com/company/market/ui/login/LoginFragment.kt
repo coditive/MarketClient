@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
 
         }
         viewModel.status.observe(viewLifecycleOwner) {
-            when (LoginState.LOGGED_IN) {
+            when (it) {
                 LoginState.NOT_LOGGED_IN -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(

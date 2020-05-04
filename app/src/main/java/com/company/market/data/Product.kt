@@ -2,6 +2,7 @@ package com.company.market.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 
 
