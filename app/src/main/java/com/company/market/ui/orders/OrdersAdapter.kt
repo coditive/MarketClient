@@ -1,5 +1,6 @@
 package com.company.market.ui.orders
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.Typeface
 import android.text.style.AbsoluteSizeSpan
@@ -22,11 +23,12 @@ class OrdersAdapter : ListAdapter<UserOrder, OrdersAdapter.OrderViewHolder>(CALL
 
     inner class OrderViewHolder(private val binding: OrderItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SimpleDateFormat")
         fun bind(userOrder: UserOrder) {
             binding.apply {
                 orderTimestamp.text =
                     SimpleDateFormat("dd-MMM-yyyy HH:mm a").format(userOrder.timestamp).toString()
-                orderStatus.text = userOrder.payment_status
+                orderStatus.text = userOrder.status_of_order
 
                 val truss = Truss()
                 for (order in userOrder.order) {

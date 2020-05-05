@@ -60,6 +60,11 @@ class ProductRepo(
         orderDataSource.deleteOrder(id)
     }
 
+    suspend fun removeAllItems(){
+        productDataSource.removeInCartItems()
+        orderDataSource.removeAllOrders()
+    }
+
     companion object {
         private const val TAG = "ProductRepo"
     }

@@ -26,6 +26,9 @@ interface ProductDao {
     @Query("UPDATE product SET isInCart = :inCart WHERE id = :productId")
     suspend fun setIsInCart(inCart: Boolean, productId: String)
 
+    @Query("UPDATE product SET isInCart = :inCart")
+    suspend fun removeInCartItems(inCart: Boolean = false)
+
     //SQLite does not have a boolean data type. Room maps it to an INTEGER column, mapping true to 1 and false to 0.
     @Query("SELECT * FROM product WHERE isInCart = :isInCart")
     fun getItemsInCart(isInCart: Boolean = true): LiveData<List<Product>>

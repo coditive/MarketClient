@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.company.market.MarketApplication
 import com.company.market.R
 import com.company.market.databinding.FragmentMarketBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
 
 class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +79,17 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 true
             }
             R.id.menu_cart_item -> {
-                findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToCartFragment())
+                MaterialAlertDialogBuilder(requireActivity(), R.style.AlertDialogTheme)
+                    .setTitle("Title")
+                    .setMessage("Your message goes here. Keep it short but clear.")
+                    .setPositiveButton(
+                        "I Agree"
+                    ) { _, _ -> findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToCartFragment())}
+                    .setNeutralButton(
+                        "Not Agree"
+                    ) { _, _ -> viewModel.removeAllFromCart()}
+                    .show()
+
                 true
             }
             else -> false
