@@ -30,13 +30,6 @@ class LoginFragment : Fragment() {
     ): View? {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-//      //TODO() : put below code when defining the flow of ui.
-//        val prefs = requireContext().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE)
-//        val token = prefs.getString(TOKEN_KEY, null)
-//        if(token != null) {
-//            findNavController().navigate(R.id.marketFragment)
-//        }
-//     //
 
         viewModel.token.observe(viewLifecycleOwner) {
             if (it != null)
@@ -84,13 +77,18 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.button.setOnClickListener {
-            val userName: String = binding.editTextUsername.editText?.text.toString()
-            val password: String = binding.editTextPassword.editText?.text.toString()
-            Log.d("Login Details", "Username : $userName, pass : $password")
-            viewModel.attemptLogin(userName, password)
-        }
+        binding.apply {
+            buttonLogin.setOnClickListener {
+                val userName: String = binding.editTextUsername.editText?.text.toString()
+                val password: String = binding.editTextPassword.editText?.text.toString()
+                Log.d("Login Details", "Username : $userName, pass : $password")
+                viewModel.attemptLogin(userName, password)
+            }
+            buttonRegister.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            }
 
+        }
         return binding.root
     }
 }

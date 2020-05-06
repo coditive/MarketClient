@@ -19,4 +19,9 @@
     <string name="place_order">Place Order</string>
     <string name="out_of_stock">Out of Stock</string>
     <string name="my_orders">My Orders</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="address">Address</string>
+    <string name="register">Register</string>
 </resources>
