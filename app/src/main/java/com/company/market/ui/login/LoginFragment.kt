@@ -30,13 +30,13 @@ class LoginFragment : Fragment() {
     ): View? {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-      //TODO() : put below code when defining the flow of ui.
-        val prefs = requireContext().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE)
-        val token = prefs.getString(TOKEN_KEY, null)
-        if(token != null) {
-            findNavController().navigate(R.id.marketFragment)
-        }
-     //
+//      //TODO() : put below code when defining the flow of ui.
+//        val prefs = requireContext().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE)
+//        val token = prefs.getString(TOKEN_KEY, null)
+//        if(token != null) {
+//            findNavController().navigate(R.id.marketFragment)
+//        }
+//     //
 
         viewModel.token.observe(viewLifecycleOwner) {
             if (it != null)
