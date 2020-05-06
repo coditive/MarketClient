@@ -18,11 +18,14 @@
         android:id="@+id/edit_text_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/full_name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edit_text_phone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -30,7 +33,9 @@
         android:id="@+id/edit_text_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/phone_number"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/edit_text_email"
@@ -43,33 +48,67 @@
         android:id="@+id/edit_text_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/email"
-        app:layout_constraintBottom_toTopOf="@+id/edit_text_address"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_address_loc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_phone" />
 
     <EditText
-        android:id="@+id/edit_text_address"
+        android:id="@+id/edit_text_address_loc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/address"
-        app:layout_constraintBottom_toTopOf="@+id/button_register"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/address_loc"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_address_pincode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_email"/>
+
+    <EditText
+        android:id="@+id/edit_text_address_pincode"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/address_pin"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_address_loc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_register"
+        app:layout_constraintHorizontal_bias="0"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="461dp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="100dp"
+        android:text="Note: Your username will be your email and phone number will be your password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_address" />
+        app:layout_constraintTop_toBottomOf="@id/edit_text_address_pincode" />
 </androidx.constraintlayout.widget.ConstraintLayout>
