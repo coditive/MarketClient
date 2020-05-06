@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -37,10 +37,10 @@
             app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_cart"
         android:id="@+id/cartFragment"
         android:name="com.company.market.ui.cart.CartFragment"
-        android:label="@string/your_cart" >
+        android:label="@string/your_cart"
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_marketFragment"
             app:destination="@id/marketFragment" />
@@ -50,4 +50,22 @@
         android:name="com.company.market.ui.orders.OrdersFragment"
         android:label="OrdersFragment"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.company.market.ui.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_marketFragment"
+            app:destination="@id/marketFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
