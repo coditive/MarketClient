@@ -102,7 +102,7 @@
     </style>
 
     <style name="Alert.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="backgroundTint">@color/color_primary_variant</item>
+        <item name="backgroundTint">@color/color_secondary</item>
         <item name="rippleColor">@color/color_secondary</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">14sp</item>

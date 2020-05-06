@@ -40,7 +40,11 @@
         tools:layout="@layout/fragment_cart"
         android:id="@+id/cartFragment"
         android:name="com.company.market.ui.cart.CartFragment"
-        android:label="@string/your_cart" />
+        android:label="@string/your_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_marketFragment"
+            app:destination="@id/marketFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.company.market.ui.orders.OrdersFragment"

@@ -34,14 +34,4 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/item_compact_product" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="8dp"
-        android:text="@string/search"
-        app:icon="@drawable/ic_search_black_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

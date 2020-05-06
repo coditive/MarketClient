@@ -63,10 +63,6 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
                 adapter = productAdapter
                 layoutManager = LinearLayoutManager(requireContext())
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    setOnScrollChangeListener { _, _, _, _, oldScrollY ->
-                        fab.apply { if (oldScrollY < 0) shrink() else extend() }
-                    }
             }
         }
         return binding.root
@@ -80,14 +76,16 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
             }
             R.id.menu_cart_item -> {
                 MaterialAlertDialogBuilder(requireActivity(), R.style.AlertDialogTheme)
-                    .setTitle("Title")
-                    .setMessage("Your message goes here. Keep it short but clear.")
+                    .setTitle("Terms and Conditions")
+                    .setMessage("Rates shown will be final and will not change for this order even if rates are changed before taking delivery of the goods")
                     .setPositiveButton(
                         "I Agree"
                     ) { _, _ -> findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToCartFragment())}
                     .setNeutralButton(
                         "Not Agree"
-                    ) { _, _ -> viewModel.removeAllFromCart()}
+                    ) { _, _ -> viewModel.removeAllFromCart()
+                        requireActivity().finish()
+                    }
                     .show()
 
                 true

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.company.market.MarketApplication
 import com.company.market.R
 import com.company.market.databinding.FragmentCartBinding
+import com.company.market.ui.market.MarketFragment
+import com.company.market.ui.market.MarketFragmentDirections
 
 
 class CartFragment : Fragment() {
@@ -63,7 +65,9 @@ class CartFragment : Fragment() {
                 adapter = cartAdapter
             }
             orderButton.apply {
-
+                setOnClickListener{
+                    findNavController().navigate(CartFragmentDirections.actionCartFragmentToMarketFragment())
+                }
             }
         }
 
