@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 data class UserSignUp(
     val first_name: String,
     val last_name: String,
-    val phone: Int,
+    val phone: Long,
     val email: String,
     val address: Address
 )

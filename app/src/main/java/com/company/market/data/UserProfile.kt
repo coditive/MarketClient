@@ -13,7 +13,7 @@ data class UserProfile constructor(
     val first_name: String,
     val last_name: String,
     val email: String,
-    val phone: Int,
+    val phone: Long,
     @Embedded
      val address: Address
 )

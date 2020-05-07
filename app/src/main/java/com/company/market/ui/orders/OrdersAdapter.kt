@@ -28,7 +28,7 @@ class OrdersAdapter : ListAdapter<UserOrder, OrdersAdapter.OrderViewHolder>(CALL
             binding.apply {
                 orderTimestamp.text =
                     SimpleDateFormat("dd-MMM-yyyy HH:mm a").format(userOrder.timestamp).toString()
-                orderStatus.text = userOrder.status_of_order
+                orderStatus.text = userOrder.delivery_status
 
                 val truss = Truss()
                 for (order in userOrder.order) {

@@ -41,8 +41,8 @@ class OrdersFragment : Fragment() {
             swipeToRefreshView.setOnRefreshListener { viewModel.reload() }
         }
         viewModel.apply {
-            orderList.observe(viewLifecycleOwner) {
-                orderAdapter.submitList(it)
+            orderList.observe(viewLifecycleOwner) { list ->
+                orderAdapter.submitList(list.sortedByDescending {it.timestamp })
             }
             loading.observe(viewLifecycleOwner) {
                 binding.swipeToRefreshView.isRefreshing = it

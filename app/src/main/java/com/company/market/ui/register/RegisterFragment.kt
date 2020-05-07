@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.company.market.MarketApplication
-import com.company.market.data.Address
-import com.company.market.data.UserSignUp
+import androidx.lifecycle.observe
 import com.company.market.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -28,24 +28,37 @@ class RegisterFragment : Fragment() {
     ): View? {
         val binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.apply {
+            viewModel.loading.observe(viewLifecycleOwner){
+                if(it){
+                    progressBar.visibility = View.VISIBLE
+                } else{
+                    progressBar.visibility = View.GONE
+                }
+            }
+
+            viewModel.status.observe(viewLifecycleOwner) {
+                when(it){
+                    RegistrationState.NOT_REGISTERED ->
+                        Toast.makeText(requireActivity(),
+                            "Enter Your Details to Register",
+                            Toast.LENGTH_SHORT).show()
+                    RegistrationState.NAME_ERROR -> editTextName.error = "Enter Your Full Name"
+                    RegistrationState.EMAIL_ERROR -> editTextEmail.error = "Enter Your correct email"
+                    RegistrationState.PHONE_ERROR -> editTextPhone.error = "Enter your correct phone number"
+                    RegistrationState.PINCODE_ERROR -> editTextAddressPincode.error = "Enter your correct pincode"
+                    RegistrationState.ADDRESS_ERROR -> editTextAddressLoc.error = "Enter your address"
+                    RegistrationState.REGISTERED ->
+                        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToMarketFragment())
+                }
+            }
+
             buttonRegister.setOnClickListener {
-                val (first , last) = editTextName.text.split(" ")
+                val name = editTextName.text.toString()
                 val email = editTextEmail.text.toString()
                 val phone =  editTextPhone.text.toString()
                 val loc = editTextAddressLoc.text.toString()
                 val pin = editTextAddressPincode.text.toString()
-
-                when {
-                    last.isEmpty() -> editTextName.error = "Enter Your Full Name"
-                    email.isEmpty() -> editTextEmail.error = "Email is required"
-                    phone.isEmpty() -> editTextPhone.error = "Phone Number is required"
-                    loc.isEmpty() -> editTextAddressLoc.error = "Address is required"
-                    pin.isEmpty() -> editTextAddressPincode.error = "Pincode is required"
-                    else ->
-                        viewModel.attemptRegister(UserSignUp(first, last, phone.toInt(), email,
-                            Address(loc, "home", pin.toInt())))
-                }
-                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToMarketFragment())
+                viewModel.attemptRegister(name, email, phone, loc, pin)
             }
         }
         return binding.root

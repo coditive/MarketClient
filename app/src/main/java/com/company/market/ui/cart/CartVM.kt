@@ -23,7 +23,7 @@ class CartVM(private val orderDao: OrderDao,
     fun increaseQuantity(index: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val order = ordersInCart.value?.get(index)
-            orderDao.setQuantity(order!!.quantity + 0.25, order.product_id)
+            orderDao.setQuantity(order!!.quantity + 0.25, ((order.quantity + 0.25) * order.price),order.product_id)
         }
     }
 
@@ -33,7 +33,7 @@ class CartVM(private val orderDao: OrderDao,
         viewModelScope.launch(Dispatchers.IO) {
             val order = ordersInCart.value?.get(index)
             if ((order!!.quantity - 0.25) == 0.0) orderDao.deleteOrder(order.product_id)
-            else orderDao.setQuantity(order.quantity - 0.25, order.product_id)
+            else orderDao.setQuantity(order.quantity - 0.25, ((order.quantity + 0.25) * order.price), order.product_id)
         }
     }
 
