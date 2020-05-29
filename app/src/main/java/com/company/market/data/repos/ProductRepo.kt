@@ -8,7 +8,10 @@ import com.company.market.data.Product
 import com.company.market.data.local.OrderDao
 import com.company.market.data.local.ProductDao
 import com.company.market.data.remote.RemoteApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.IOException
+import kotlin.coroutines.coroutineContext
 
 class ProductRepo(
     private val productDataSource: ProductDao,
@@ -63,6 +66,17 @@ class ProductRepo(
     suspend fun removeAllItems(){
         productDataSource.removeInCartItems()
         orderDataSource.removeAllOrders()
+    }
+
+    suspend fun searchProductFromText(name: String): List<Product> = withContext(Dispatchers.IO){
+        //loading search results from db
+         productDataSource.searchProduct(name)
+    }
+
+    suspend fun rebuildFts() {
+        withContext(Dispatchers.IO) {
+            productDataSource.rebuildFts()
+        }
     }
 
     companion object {

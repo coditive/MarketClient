@@ -26,4 +26,8 @@
     <string name="address_pin">Pincode</string>
     <string name="address_type">Address Type</string>
     <string name="register">Register</string>
+    <string name="string_hint">Search Hint</string>
+
+    <string name="search_activity">Search</string>
+
 </resources>

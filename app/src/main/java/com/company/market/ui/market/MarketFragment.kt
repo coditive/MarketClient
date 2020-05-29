@@ -2,11 +2,10 @@ package com.company.market.ui.market
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -63,12 +62,21 @@ class MarketFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
                 adapter = productAdapter
                 layoutManager = LinearLayoutManager(requireContext())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    setOnScrollChangeListener { _, _, _, _, oldScrollY ->
+                        fab.apply { if (oldScrollY < 0) shrink() else extend() }
+                    }
+            }
+
+            fab.setOnClickListener {
+                requireActivity().onSearchRequested()
             }
         }
         return binding.root
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
+
         return when (item?.itemId) {
             R.id.menu_item_profile -> {
                 findNavController().navigate(MarketFragmentDirections.actionMarketFragmentToProfileFragment())

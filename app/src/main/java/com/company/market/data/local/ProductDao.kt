@@ -33,4 +33,11 @@ interface ProductDao {
     @Query("SELECT * FROM product WHERE isInCart = :isInCart")
     fun getItemsInCart(isInCart: Boolean = true): LiveData<List<Product>>
 
+    @Query("SELECT * FROM product JOIN product_fts ON product_fts.id = product.id WHERE product_fts.title MATCH :title")
+    suspend fun searchProduct(title: String): List<Product>
+
+
+    @Query("INSERT INTO product_fts(product_fts) VALUES ('rebuild')")
+    suspend fun rebuildFts()
+
 }

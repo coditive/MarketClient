@@ -1,28 +1,31 @@
-package com.company.market.ui.market
+package com.company.market.ui.searchable
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.company.market.data.Product
+import com.company.market.data.local.OrderDao
+import com.company.market.data.local.ProductDao
+import com.company.market.data.remote.RemoteApi
 import com.company.market.data.repos.ProductRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MarketVM(private val productRepo: ProductRepo) : ViewModel() {
+class SearchVM (
+    private val productRepo: ProductRepo
+) : ViewModel() {
 
-    val productList: LiveData<List<Product>> = productRepo.productInMemory
+    private val _searchedProductList = MutableLiveData<List<Product>>()
+    val searchedProductList: LiveData<List<Product>> = _searchedProductList
 
     val loadingState: LiveData<Boolean> = productRepo.loadingState
 
-    init {
-        viewModelScope.launch { reload() }
-    }
 
-    fun reload() {
-        viewModelScope.launch {
-            productRepo.loadProducts()
-            productRepo.rebuildFts()
-        }
+    fun searchProduct(productName: String){
+       viewModelScope.launch {
+           _searchedProductList.value = productRepo.searchProductFromText(productName)
+       }
     }
 
     fun addToCart(position: Int) {
